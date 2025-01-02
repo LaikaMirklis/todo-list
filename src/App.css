@@ -40,3 +40,17 @@
 .read-the-docs {
   color: #888;
 }
+
+/* new styles */
+.appWrapper img {
+  height: 2em;
+}
+
+.appWrapper {
+  display: flex;
+}
+
+.settings {
+  text-align: center;
+  padding-right: 2em;
+}
