@@ -8,30 +8,46 @@ type Task = {
 
 const initialTasks: Task[] = [
     { id: 1, description: 'water plants', isChecked: false },
-    { id: 2, description: 'wash dishes', isChecked: true }
+    { id: 2, description: 'wash dishes', isChecked: false },
+    { id: 3, description: 'cook dinner', isChecked: false },
+    { id: 4, description: 'wipe the dust', isChecked: false },
+    { id: 5, description: 'vacuum the room', isChecked: false },
 ]
 
 
 const TaskList = () => {
-    const [tasks, setTask] = useState<Task[]>(initialTasks)
+    const [tasks, setTasks] = useState<Task[]>(initialTasks)
+    const [completedTasks, setCompletedTasks] = useState<Task[]>([])
     const [counter, setCounter] = useState<number>(tasks.length)
     const [taskInput, setTaskInput] = useState<string>('')
 
     const tasksList = tasks.map(task =>
-        <div key={task.id}>
-            <input type='checkbox' checked={task.isChecked} onChange={() => checkTask(task.id)} />
-            {task.isChecked ? <s>{task.description}</s> : task.description}
+        <div key={task.id} className="taskItem">
+            <div>
+                <input type='checkbox' checked={task.isChecked} onChange={() => checkTask(task.id)} />
+                <p>{task.isChecked ? <s>{task.description}</s> : task.description} </p>
+            </div>
+            <button onClick={() => deleteTask(task.id)}>⨉</button>
+        </div>
+    )
+
+
+
+    const ckeckedTasksList = completedTasks.map(task =>
+        <div key={task.id} className="taskItem">
+            <div>
+                <input type='checkbox' checked={task.isChecked} onChange={() => checkTask(task.id)} />
+                <p>{task.isChecked ? <s>{task.description}</s> : task.description} </p>
+            </div>
             <button onClick={() => deleteTask(task.id)}>⨉</button>
         </div>
     )
 
     const checkTask = (id: number): void => {
-        const updatedTasks = tasks.map(task =>
-            task.id === id
-                ? { ...task, isChecked: !task.isChecked }
-                : task
-        );
-        setTask(updatedTasks)
+        const checkedTask = { ...tasks[id - 1], isChecked: true }
+        const updatedTasks = tasks.filter(task => task.id !== id);
+        setTasks(updatedTasks)
+        setCompletedTasks([...completedTasks, checkedTask])
     }
 
     const addTask = (): void => {
@@ -42,16 +58,15 @@ const TaskList = () => {
                 isChecked: false
             }
             setCounter(counter + 1)
-            setTask([...tasks, newTask])
+            setTasks([...tasks, newTask])
             setTaskInput('')
         }
     }
 
     const deleteTask = (id: number): void => {
         const updatedTasks = tasks.filter(task => task.id !== id);
-        setTask(updatedTasks)
+        setTasks(updatedTasks)
     }
-
 
     const handleInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
         setTaskInput(e.target.value)
@@ -59,13 +74,18 @@ const TaskList = () => {
 
 
     return (
-        <div>
-            <div>
-                <input value={taskInput} onInput={handleInputChange} />
+        <div className="taskListWrapper">
+            <h1>Things to do</h1>
+            <div className="inputWrapper">
+                <input value={taskInput} onInput={handleInputChange} placeholder="Write a task..." />
                 <button onClick={addTask}>Add Task</button>
             </div>
-            <div>
+            <div className="taskList">
                 {tasksList}
+            </div>
+            <h2>COMPLETED</h2>
+            <div className="completedTaskList">
+                {ckeckedTasksList}
             </div>
         </div>
     )

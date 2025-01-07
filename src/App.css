@@ -1,56 +1,120 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
-
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
+/* new styles */
+.appWrapper {
+  background-color: #f9f5f4;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  margin: 0;
   padding: 2em;
 }
 
-.read-the-docs {
-  color: #888;
-}
-
-/* new styles */
 .appWrapper img {
   height: 2em;
 }
 
-.appWrapper {
-  display: flex;
+.inputWrapper {
+  margin: 2em 0;
+  position: sticky;
 }
+
+.inputWrapper input {
+  box-sizing: border-box;
+  height: 3.5em;
+  width: 24em;
+  border: none;
+  background-color: #f3efee;
+  padding: 1em;
+  border-radius: 0.75em;
+}
+
+.inputWrapper button {
+  margin-left: 0.75em;
+  height: 3.5em;
+  border: none;
+  border-radius: 0.75em;
+  color: #f9f5f4;
+  background-color: #393433;
+  padding: 1em;
+}
+
+/* .appWrapper button {
+  margin: 0.25em 1em;
+} */
 
 .settings {
   text-align: center;
   padding-right: 2em;
+}
+
+.taskListWrapper {
+  display: flex;
+  flex-direction: column;
+  /* max-width: min-content; */
+}
+
+.taskListWrapper h1 {
+  text-align: center;
+  font-size: 1.5em;
+  margin: 0;
+  padding: 0;
+}
+
+.taskItem {
+  background-color: #f3efee;
+  margin-bottom: 1em;
+  border-radius: 0.75em;
+  padding: 1em;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.taskItem div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.taskItem p {
+  margin: 0;
+  padding: 0;
+}
+
+.taskItem input {
+  appearance: none;
+  height: 1.5em;
+  width: 1.5em;
+  margin: 0;
+  margin-right: 1em;
+  padding: 0;
+  border: 0.1em solid #9f9f9f;
+  border-radius: 0.375em;
+  display: inline-grid;
+  place-content: center;
+  /* text-align: center; */
+}
+
+.taskItem input:checked {
+  background-color: #393433;
+  border-color: #393433;
+}
+
+.taskItem input:checked::after {
+  content: '🗸';
+  color: #f9f5f4;
+  font-weight: bold;
+}
+
+.taskItem button {
+  background-color: transparent;
+  border: none;
+}
+
+.taskListWrapper h2 {
+  color: #d1a28b;
+  font-size: 1em;
+  margin: 1em 0 1.5em 0;
+  padding: 0;
 }
